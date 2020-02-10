@@ -32,13 +32,13 @@ try {
     fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
   }
 const active = new Map();
-const log = client.channels.get('471603875749691393') // Logging channel
+const log = client.channels.get('635051074809626657') // Logging channel
 
 const serverStats = {
-  guildID: '586076490588880898',
-  totalUsersID: '661201675427512343',
-  memberCountID: '669507020084346880',
-  botCountID: '670200360044068874'
+  guildID: '635051074809626657',
+  totalUsersID: '645928693021016084',
+  memberCountID: '645276352626425918',
+  botCountID: '645247568590405662'
 }
 
 var ownerId = '596521432507219980'; //My ID
@@ -54,7 +54,7 @@ const getDefaultChannel = async (guild) => {
    .filter(c => c.type === "text" &&
      c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
    .sort((a, b) => a.position - b.position ||
-     Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
+     client.fromString(a.id).sub(client.fromString(b.id)).toNumber())
    .first().id;
 }
 
@@ -64,9 +64,9 @@ client.on("error", e => {
 
 client.on('ready', () => { //Startup
   console.log("Bot on!");
-  client.user.setUsername("JP.GAMER");
-  client.user.setStatus('idle);
-  client.user.setActivity(`on ${client.users.size} users | #help`, {
+  client.user.setUsername("ME ROYAL PLUS");
+  client.user.setStatus('dnd');
+  client.user.setActivity(`on ${client.users.size} users | ?help`, {
     type: 'WATCHING'
   });
 });
@@ -78,14 +78,14 @@ client.on("disconnected", () => {
 });
 
 client.on('guildCreate', guild => { // If the Bot was added on a server, proceed
-  client.user.setActivity(`on ${client.users.size} users | #help`, {
+  client.user.setActivity(`on ${client.users.size} users | ?help`, {
     type: 'WATCHING'
   });
   
-  const chan = client.channels.get("553637012457127946");
+  const chan = client.channels.get("647318983649001472");
   
   config[guild.id] = {
-    prefix: '#',
+    prefix: '?',
     delete: 'true',
     deleteTime: 10000,
     volume: 100,
@@ -99,17 +99,17 @@ client.on('guildCreate', guild => { // If the Bot was added on a server, proceed
   /* Welcome message */
   
   var welcome = new Discord.RichEmbed()
-    .setColor(0x000000)
-    .setURL("https://discord.gg/B")
+    .setColor(0x00FFFF)
+.setURL("https://discord.gg/KmngEup")
     .setTitle("Joined " + guild.name + " | Click to join support server")
-    .setDescription("**Well, hello, I think.**\n\nMy name is Jp.gamer, as you can see. I'm just a bot. Perfect bot. Another, same as other millions bots.\n\n")
-    .addField("Prefix", `\`#\``, false)
+    .setDescription("**Well, hello, I think.**\n\nMy name is me royal Plus, as you can see. I'm just a bot. Perfect bot. Another, same as other millions bots.\n\n**")
+    .addField("Prefix", `\`?\``, false)
     .addField("Auto-delete", "true", false)
     .addField("Delete time", "10s", false)
     .addField("Default volume", "100%", false)
     .addField("Max volume", "200%", false)
     .addField("Level UP messages", "false", false)
-    .setFooter("Members: " + guild.memberCount + " | Guild: " + guild.name + " | Use #help to get help information | Official website: expobot.glitch.me");
+    .setFooter("Members: " + guild.memberCount + " | Guild: " + guild.name + " | Use ?help to get help information | Official website: https://me-royal.glitch.me");
   
   const channel = Promise.resolve(getDefaultChannel(guild));
   channel.then(function(ch) {
@@ -119,8 +119,9 @@ client.on('guildCreate', guild => { // If the Bot was added on a server, proceed
   
   let liveLEmbed = new Discord.RichEmbed()
     .setAuthor(client.user.username, client.user.avatarURL)
+  .setColor("#00FF00")
     .setTitle(`Joined A Guild`)
-    .setDescription(`**Guild Name**: ${guild.name}\n**Guild ID**: ${guild.id}\n**Members Get**: ${guild.memberCount}`)
+    .setDescription(`**Guild Name**: ${guild.name}\n**Guild ID**: ${guild.id}\n**Members Get**: ${guild.memberCount}\n**server owner**: ${guild.owner.user.tag}`)
   chan.send(liveLEmbed);
   
 });  
@@ -130,14 +131,16 @@ client.on('guildDelete', (guild) => { // If the Bot was removed on a server, pro
   fs.writeFile('./config.json', JSON.stringify(config, null, 2), (err) => {
     if (err) console.log(err)
   })
-  client.user.setActivity(`on ${client.users.size} users | #help`, {
+  client.user.setActivity(`on ${client.users.size} users | ?help`, {
     type: 'WATCHING'
   });
-  const chan = client.channels.get("471603875749691393");
+  const chan = client.channels.get("649817049471778836");
+
   let liveLEmbed = new Discord.RichEmbed()
     .setAuthor(client.user.username, client.user.avatarURL)
     .setTitle(`Stopped Serving A Guild`)
-    .setDescription(`**Guild Name**: ${guild.name}\n**Guild ID**: ${guild.id}\n**Members Lost**: ${guild.memberCount}`)
+  .setColor("#FF0000")
+    .setDescription(`**Guild Name**: ${guild.name}\n**Guild ID**: ${guild.id}\n**Members Lost**: ${guild.memberCount}\n**Server owner:**${guild.owner.user.tag}`)
     chan.send(liveLEmbed);
 });
 
@@ -151,7 +154,7 @@ client.on('message', message => { //If recieves message
     config = JSON.parse(fs.readFileSync("./config.json", "utf8")); //Overwrite prefix (important for changing prefix)
   } catch(ex){
     config[message.guild.id] = {
-      prefix: '#',
+      prefix: '?',
       delete: 'true',
       deleteTime: 10000,
       volume: 100,
@@ -166,7 +169,7 @@ client.on('message', message => { //If recieves message
   
   if (config[message.guild.id] == undefined) {
     config[message.guild.id] = {
-      prefix: '#',
+      prefix: '?',
       delete: 'true',
       deleteTime: 10000,
       volume: 100,
@@ -183,9 +186,9 @@ client.on('message', message => { //If recieves message
   let xpAdd = Math.floor(Math.random() * 7) + 8;
   
   // POINT SYSTEM
-  
+
   db.fetch(`${message.guild.id}_${message.author.id}`).then(i => {
-    if (i == null) db.set(`balance_${message.guild.id}_${message.author.id}`, 50);
+    if (i == null) db.set(`balance_${message.guild.id}_${message.author.id}`, 100);
   });
   
   levels.fetch(`${message.guild.id}_${message.author.id}`).then(i => {
@@ -210,7 +213,7 @@ client.on('message', message => { //If recieves message
         points.set(`${message.guild.id}_${message.author.id}`, 0);
         levels.fetch(`${message.guild.id}_${message.author.id}`, {"target": ".data"}).then(lvl => {
           if (message.guild.id !== "264445053596991498" && config[message.guild.id].levelup !== false) {
-            message.channel.send({ embed: {"title": "Level Up!", "description": "Now your level - **" + lvl + "**", "color": 0x42f477} });
+		message.reply({ embed: {"title": "Level Up!", "description": "Now your level - **" + lvl + "**", "color": 0x42f477} });
           }
         });
       }
@@ -224,14 +227,14 @@ client.on('message', message => { //If recieves message
   let args = message.content.slice(prefix.length).trim().split(' '); //Setting-up arguments of command
   let cmd = args.shift().toLowerCase(); //LowerCase command
   
-  if (message.content === "#!reset-prefix") {
-    config[message.guild.id].prefix = '#';
+  if (message.content === "?reset-prefix") {
+    config[message.guild.id].prefix = '?';
     fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
-    message.channel.send({ embed: {"title": "Prefix - #", "color": 0x22ff22} });
+    message.channel.send({ embed: {"title": "Prefix - ?", "color": 0x22ff22} });
     return;
   }
   
-  if (message.content === prefix + "nsfw" && message.guild.id == "471591472311828480") {
+  if (message.content === prefix+ "nsfw" && message.guild.id == "635051074809626657") {
     message.delete(1000);
     var author = message.member;
     var role = message.guild.roles.find('name', "Hide NSFW"); //Role Search
@@ -278,7 +281,7 @@ client.on('message', message => { //If recieves message
     commandFile.run(client, message, args, ops); //Pass four args into 'command'.js and run it
 
   } catch (e) { //Catch errors 
-    if (!message.content === "#!reset-prefix") {
+    if (!message.content === "?reset-prefix") {
       message.channel.send({
         embed: {
           "color": 0xff2222,
@@ -299,10 +302,10 @@ client.on('message', message => { //If recieves message
 
 client.on('guildMemberAdd', member => {
   if (member.guild.id !== serverStats.guildID) return;
-  client.channels.get(serverStats.totalUsersID).setName(`🆙Total: ${member.guild.memberCount}`);
-  client.channels.get(serverStats.memberCountID).setName(`🕵️Users: ${member.guild.members.filter(m => !m.user.bot).size}`);
-  client.channels.get(serverStats.botCountID).setName(`🤖Bots: ${member.guild.members.filter(m => m.user.bot).size}`);
-  db.set(`balance_${member.guild.id}_${member.id}`, 50);
+  client.channels.get(serverStats.totalUsersID).setName(`Total: ${member.guild.memberCount}`);
+  client.channels.get(serverStats.memberCountID).setName(`Users: ${member.guild.members.filter(m => !m.user.bot).size}`);
+  client.channels.get(serverStats.botCountID).setName(`Bots: ${member.guild.members.filter(m => m.user.bot).size}`);
+  db.set(`bal_${member.guild.id}_${member.id}`, 0);
   levels.set(`${member.guild.id}_${member.id}`, 1);
   points.set(`${member.guild.id}_${member.id}`, 0);
   xpl.set(`${member.guild.id}_${member.id}`, 0);
@@ -321,10 +324,10 @@ client.on('guildMemberAdd', member => {
 
 client.on('guildMemberRemove', member => {
   if (member.guild.id !== serverStats.guildID) return;
-  client.channels.get(serverStats.totalUsersID).setName(`🆙Total: ${member.guild.memberCount}`);
-  client.channels.get(serverStats.memberCountID).setName(`🕵️Users: ${member.guild.members.filter(m => !m.user.bot).size}`);
-  client.channels.get(serverStats.botCountID).setName(`🤖Bots: ${member.guild.members.filter(m => m.user.bot).size}`);
-  db.delete(`balance_${member.guild.id}_${member.id}`);
+  client.channels.get(serverStats.totalUsersID).setName(`Total: ${member.guild.memberCount}`);
+  client.channels.get(serverStats.memberCountID).setName(`Users: ${member.guild.members.filter(m => !m.user.bot).size}`);
+  client.channels.get(serverStats.botCountID).setName(`Bots: ${member.guild.members.filter(m => m.user.bot).size}`);
+  db.delete(`bal_${member.guild.id}_${member.id}`);
   levels.delete(`${member.guild.id}_${member.id}`);
   points.delete(`${member.guild.id}_${member.id}`);
   xpl.delete(`${member.guild.id}_${member.id}`);
@@ -341,21 +344,102 @@ client.on('guildMemberRemove', member => {
   
 });
 
-
+const { Canvas } = require("canvas-constructor"); 
+const { resolve, join } = require('path'); 
+const { get }= require('snekfetch');
+const superagent = require('superagent')
+const { fetch } = require('node-fetch');
 client.once('ready', () => {
-console.log(`${client.user.username}`);
+	console.log('Ready!');
 });
 
 client.on("guildMemberAdd", async member => {
-  let channel = member.guild.channels.get("672043081255616532");
-  channel.send("<@"+member.id+">",{embed:{
-    description: `Welcome To **${member.guild.name}**. Have A Great Time Here :wink:`,
-    color: 0x0022ff,
-    image:{
-      url: "https://cdn.discordapp.com/attachments/661523269882478602/673372026437632000/PicsArt_02-02-09.09.53.png",
-    }
-  }});
-})
+  
 
-//Connecting bot
-client.login(process.env.TOKEN);,
+  
+  async function createCanvas() {
+  
+    let name = member.user.username;
+let imageUrlPhoto = /\?size=2048$/g;
+  
+  var server = records.get(member.guild.id);
+	if(server.image != undefined && server.message != undefined) {
+    
+        var msD = server.message.replace('{user}', name)
+.replace('{server}', member.guild.name)
+.replace('{membercount}',member.guild.memberCount);  
+    
+let image = `${server.image}`;
+let aaa = member.user.displayAvatarURL; 
+    
+let {body: background} = await superagent.get(image);  
+let {body: avatar} = await superagent.get(aaa);    
+
+  return new Canvas(934, 282) 
+    .setColor('#FFFFFF')
+    .setTextFont("bold 30px Arial") 
+    .addImage(background, 0, 0, 934, 282)
+       .addText(msD, 320, 150)
+.addRoundImage(avatar, 110, 50, 200, 200, 100)
+    .toBufferAsync(); 
+  }}
+  var server = records.get(member.guild.id);
+	if(server.join != undefined && server.channel != undefined) {
+    		var msg = server.join.replace('{user}', '<@' + member.id + '>')
+.replace('{server}', member.guild.name)
+.replace('{membercount}',member.guild.memberCount);
+    
+    let channel = member.guild.channels.find("name", server.channel);
+  channel.send(msg,
+{files: [{
+      attachment: await createCanvas(), 
+    name: "welcome.png"
+
+}]
+   })
+  }
+});
+
+const records = require('./commands/records.js');
+const cmd = require('./commands/executor.js');
+const dir = 'servers.json';
+
+
+//Setup
+client.on('guildCreate', function(guild) {
+	records.add(guild.id);
+});
+
+client.on('guildDelete', function(guild) {
+	records.remove(guild.id);
+});
+
+client.on('guildMemberAdd', function(member) {
+	var server = records.get(member.guild.id);
+	if(server.join != undefined && server.channel != undefined) {
+    
+
+    member.guild.channels.find("name", server.channel).send("");
+
+}
+	if(server.role != undefined) {
+		var role = member.guild.roles.find("name", server.role);
+ if(role != undefined) {
+			member.addRole(role).catch(error => {
+				member.guild.owner.send("Error on **" + member.guild.name + "**: no parmission bot reason high role select or not parmission");
+			});
+		}
+	}
+});
+
+client.on('message', msg => {cmd.on(msg);});
+client.on('message', msg => {
+ let prefix = config[msg.guild.id].prefix;
+  if (msg.content === '<@643811842661285888>') {
+    msg.channel.send({ embed: {
+      title: "`MY NAME` : "+`${client.user.username}`+" , my default prefix: `?` , Custom Server prefix: "+"``"+`${prefix}`+"``",
+      color: 0x00FFFF
+    }});
+  }
+});
+client.login(process.env.TOKEN);
