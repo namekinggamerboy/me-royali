@@ -1,0 +1,314 @@
+{
+  "1": {
+    "name": "Help",
+    "group": "User",
+    "desc": "Gives you help information. *Use `help groups` to see list of groups*",
+    "usage": "help (command|group) (groups)"
+  },
+  "2": {
+    "name": "Stats",
+    "group": "User",
+    "desc": "Gives you some statistics",
+    "usage": "stats"
+  },
+  "3": {
+    "name": "8ball",
+    "group": "User",
+    "desc": "Asks 8ball for an answer",
+    "usage": "8ball <question>"
+  },
+  "4": {
+    "name": "Poll",
+    "group": "Moderator",
+    "desc": "Creates a simple poll with timed end. Default time: 1 hour",
+    "usage": "poll (time) <question>"
+  },
+  "5": {
+    "name": "MPoll",
+    "group": "Moderator",
+    "desc": "Creates a poll with multi-answers. Timed end will be in future :yum:",
+    "usage": "mpoll"
+  },
+  "6": {
+    "name": "Flip",
+    "group": "User",
+    "desc": "Flips a coin",
+    "usage": "flip"
+  },
+  "7": {
+    "name": "Ascii",
+    "group": "User",
+    "desc": "Creates ascii-styled text",
+    "usage": "ascii <text>"
+  },
+  "8": {
+    "name": "BF4",
+    "group": "User",
+    "desc": "Shows BF4 user statistics",
+    "usage": "bf4 <pc|ps4|ps3|xone|xbox> <user>"
+  },
+  "9": {
+    "name": "Calc",
+    "group": "User",
+    "desc": "Calculate something if you are really stupid",
+    "usage": "calc <math>"
+  },
+  "10": {
+    "name": "Dice",
+    "group": "User",
+    "desc": "Roll a dice",
+    "usage": "dice"
+  },
+  "11": {
+    "name": "Google",
+    "group": "User",
+    "desc": "Google something",
+    "usage": "google <question>"
+  },
+  "12": {
+    "name": "Messages",
+    "group": "User",
+    "desc": "Shows amount of your messages (or a mentioned user)",
+    "usage": "messages (@user)"
+  },
+  "13": {
+    "name": "Leaderboards",
+    "group": "User",
+    "desc": "Shows a leaders of messages",
+    "usage": "leaderboards"
+  },
+  "14": {
+    "name": "Ping",
+    "group": "User",
+    "desc": ":ping_pong: P-p-pongo!",
+    "usage": "ping"
+  },
+  "15": {
+    "name": "Prefix",
+    "group": "User",
+    "desc": "Shows server's prefix",
+    "usage": "prefix"
+  },
+  "16": {
+    "name": "Weather",
+    "group": "User",
+    "desc": "\"Hey, Google, whats the weather now?\"",
+    "usage": "weather <city-state>"
+  },
+  "17": {
+    "name": "Play",
+    "group": "DJ",
+    "desc": "Play something. Merged with `search` command. *Moderator also can use this*",
+    "usage": "play <url|song>"
+  },
+  "18": {
+    "name": "Search",
+    "group": "DJ",
+    "desc": "Searches a song. *Moderator also can use this*",
+    "usage": "search <song>"
+  },
+  "19": {
+    "name": "Queue",
+    "group": "DJ",
+    "desc": "Shows server's queue *Moderator also can use this*",
+    "usage": "queue"
+  },
+  "20": {
+    "name": "Pause",
+    "group": "DJ",
+    "desc": "What do you think it does :thinking: *Moderator also can use this*",
+    "usage": "pause"
+  },
+  "21": {
+    "name": "Resume",
+    "group": "DJ",
+    "desc": "And this shit... :thinking: *Moderator also can use this*",
+    "usage": "resume"
+  },
+  "22": {
+    "name": "Stop",
+    "group": "DJ",
+    "desc": "*Moderator also can use this*",
+    "usage": ""
+  },
+  "23": {
+    "name": "Clear",
+    "group": "DJ",
+    "desc": "Clears server's queue. *Moderator also can use this*",
+    "usage": ""
+  },
+  "24": {
+    "name": "Stop",
+    "group": "DJ",
+    "desc": "STOPS. JUST STOPS MUSIC. *Moderator also can use this*",
+    "usage": "stop"
+  },
+  "25": {
+    "name": "Volume",
+    "group": "DJ",
+    "desc": "Change music's volume. *Moderator also can use this*",
+    "usage": "volume <0-200>"
+  },
+  "26": {
+    "name": "Skip",
+    "group": "User",
+    "desc": "Vote for skipping current song. *Everyone can use this*",
+    "usage": "skip"
+  },
+  "27": {
+    "name": "Forceskip",
+    "group": "DJ",
+    "desc": "Just skips song immidiently. *Moderator also can use this*",
+    "usage": "forceskip"
+  },
+  "28": {
+    "name": "Ban",
+    "group": "Admin",
+    "desc": "**B A N!**",
+    "usage": "ban <@user> (reason)"
+  },
+  "29": {
+    "name": "Kick",
+    "group": "Admin",
+    "desc": "**K I C K!**",
+    "usage": "kick <@user> (reason)"
+  },
+  "30": {
+    "name": "Warn",
+    "group": "Moderator",
+    "desc": "Warns someone",
+    "usage": "warn <@user> (reason)"
+  },
+  "31": {
+    "name": "Warns",
+    "group": "User",
+    "desc": "Shows user's warnings (or mentioned user)",
+    "usage": "warns (@user)"
+  },
+  "32": {
+    "name": "Settings",
+    "group": "Admin",
+    "desc": "Shows server's settings. Use `settings <parameter> <value>` to change parameters",
+    "usage": "settings <param> <val>"
+  },
+  "33": {
+    "name": "Purge",
+    "group": "Moderator",
+    "desc": "Eat some messages",
+    "usage": "purge <val 2-100>"
+  },
+  "34": {
+    "name": "DJ",
+    "group": "Admin",
+    "desc": "Shows DJ settings. Use `dj <parameter> <value>`",
+    "usage": "dj <param> <val>"
+  },
+  "35": {
+    "name": "Role",
+    "group": "Moderator",
+    "desc": "Gives someone a role or takes it back",
+    "usage": "role <add|remove> <@user>"
+  },
+  "36": {
+    "name": "Urban",
+    "group": "User",
+    "desc": "Searches something in urban disctionary",
+    "usage": "urban <text>"
+  },
+  "37": {
+    "name": "RandomUrban",
+    "group": "User",
+    "desc": "Searches something random in urban disctionary",
+    "usage": "randomurban"
+  },
+  "38": {
+    "name": "Neko",
+    "group": "User",
+    "desc": "Catches a neko for you, nya!",
+    "usage": "neko"
+  },
+  "39": {
+    "name": "Lewd",
+    "group": "User",
+    "desc": "Catches a lewd neko for you, nya!",
+    "usage": "lewd"
+  },
+  "40": {
+    "name": "Pat",
+    "group": "User",
+    "desc": "Pat someone~~",
+    "usage": "pat <@user>"
+  },
+  "41": {
+    "name": "Hug",
+    "group": "User",
+    "desc": "Hug someone~~",
+    "usage": "hug <@user>"
+  },
+  "42": {
+    "name": "Fortnite",
+    "group": "User",
+    "desc": "Shows Fortnite stats of a user. *Platforms: `pc | xbl | psn`*",
+    "usage": "fortnite <pc|xbl|psn> <user>"
+  },
+  "43": {
+    "name": "ResetPrefix",
+    "group": "Admin",
+    "desc": "Slightly resets prefix to '#'",
+    "usage": "#!reset-prefix"
+  },
+  "44": {
+    "name": "Rank",
+    "group": "User",
+    "desc": "Shows your or mentioned user rank card",
+    "usage": "rank (@user) (-color HEX) (-image URL)"
+  },
+  "45": {
+    "name": "XP",
+    "group": "User",
+    "desc": "Shows your or mentioned user amount of xps",
+    "usage": "xp (@user)"
+  },
+  "46": {
+    "name": "Balance",
+    "group": "User",
+    "desc": "Shows your balance in dollars",
+    "usage": "balance"
+  },
+  "47": {
+    "name": "Work",
+    "group": "User",
+    "desc": "Work and get money",
+    "usage": "work"
+  },
+  "48": {
+    "name": "Daily",
+    "group": "User",
+    "desc": "Get your daily money",
+    "usage": "daily"
+  },
+  "49": {
+    "name": "Convert",
+    "group": "User",
+    "desc": "Convert your XPs in dollars (1 dollars = 10XP)",
+    "usage": "convert <xp>"
+  },
+  "50": {
+    "name": "Say",
+    "group": "User",
+    "desc": "Say something with beautiful embed!",
+    "usage": "say <text>"
+  },
+  "51": {
+    "name": "Color",
+    "group": "User",
+    "desc": "Just random HEX code",
+    "usage": "color"
+  },
+  "52": {
+    "name": "About",
+    "group": "User",
+    "desc": "Something about this bot",
+    "usage": "about"
+  }
+}

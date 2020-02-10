@@ -7,13 +7,12 @@
   },
   "restart": {
     "exclude": [
-      "^public/",
-      "^dist/"
     ],
     "include": [
       "\\.js$",
-      "\\.json"
+      "\\.json",
+      "\\.sqlite"
     ]
   },
-  "throttle": 9000000
+  "throttle": 90000
 }
