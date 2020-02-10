@@ -1,12 +1,4 @@
-Discord.js bot - [expoBot](https://discordapp.com/api/oauth2/authorize?client_id=464747957288435732&permissions=8&scope=bot)
-===================
-Site: [expobot.glitch.me](https://expobot.glitch.me)
-------------------
-Made by [jarvis](https://vk.com/tarnatovski)
--------------------
-Hosting on [Glitch](https://glitch.com)
--------------------
-
+Discord.js bot ;-)
 
 
 Commands: 
