@@ -1,15 +1,3 @@
-const http = require('http');
-const express = require('express');
-const app = express();
-app.get("/", (request, response) => {
-  response.sendStatus(200);
-  console.log('Ping-pong-ping-pong... ');
-});
-app.listen(3001);
-setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 600000);
-
 //Libraries
 const db = require('quick.db'); //Quick.db
 const send = require('quick.hook'); //WebHooks lib
