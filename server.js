@@ -31,6 +31,32 @@ const serverStats = {
 
 var ownerId = '596521432507219980'; //My ID
 
+// Init discord giveaways
+const { GiveawaysManager } = require('discord-giveaways');
+client.giveawaysManager = new GiveawaysManager(client, {
+    storage: "./giveaways.json",
+    updateCountdownEvery: 5000,
+    default: {
+        botsCanWin: false,
+        exemptPermissions: [ "MANAGE_MESSAGES", "ADMINISTRATOR" ],
+        embedColor: "#FF0000",
+        reaction: "🎉"
+    }
+});
+// We now have a client.giveawaysManager property to manage our giveaways!
+
+/* Load all events */
+fs.readdir("./events/", (_err, files) => {
+    files.forEach((file) => {
+        if (!file.endsWith(".js")) return;
+        const event = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
+        console.log(`👌 Event loaded: ${eventName}`);
+        client.on(eventName, event.bind(null, client));
+        delete require.cache[require.resolve(`./events/${file}`)];
+    });
+});
+
 const getDefaultChannel = async (guild) => {
   if(guild.channels.has(guild.id))
     return guild.channels.get(guild.id)
