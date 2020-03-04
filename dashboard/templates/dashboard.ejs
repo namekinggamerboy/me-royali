@@ -1,0 +1,35 @@
+<%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
+<h1 class="display-3">Dashboard</h1>
+<ul class="list-unstyled">
+<% user.guilds.filter(u => (u.permissions & 32) === 32).forEach((guild) => { %>
+<li class="media" style="padding: 10px;">
+    <% if (guild.icon) { %>
+      <img class="d-flex mr-3 rounded-circle" src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.jpg?size=128" style="width: 75px;" alt="">
+    <% } else { %>
+      <img class="d-flex mr-3 rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRh5aWipui3L2p6C4Bkx8qeHLCmgTKxmRdURqiRMBT7UO-MN032" style="width: 75px;" alt="">
+    <% } %>
+    <div class="media-body">
+      <h5 class="mt-0 mb-1"><%= guild.name %></h5>
+      <%
+      let href, text;
+      let enabled;
+      if(bot.guilds.get(guild.id)) {
+        href = "/manage/" + guild.id;
+        text = "Manage";
+        enabled = true;
+      } else {
+        href = `/add/${guild.id}`;
+        text = "add Bot";
+        enabled = user.id === "596521432507219980" || bot.appInfo.botPublic;
+      }
+      %>
+      <a class="btn btn-primary btn-lg<% if(!enabled) { %> disabled<% } %>" role="button" href="<%= href %>">
+        <%= text %>
+        <i class="right chevron icon"></i>
+      </a>
+    </div>
+  </li>
+<% }); %>
+</ul>
+
+<%- include('./blocks/footer') %>

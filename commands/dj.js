@@ -144,7 +144,7 @@ exports.run = (client, message, args) => { //Collecting info about command
         }
       }
       
-      var djRemoveSuccess = new Discord.RichEmbed()
+      var djRemoveSuccess = new Discord.MessageEmbed()
         .setDescription(successOutput)
         .setTitle("Removed! Now \`djRoles\` includes")
         .setColor(0xFFFF22);

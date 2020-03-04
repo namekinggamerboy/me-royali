@@ -1,0 +1,57 @@
+<%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css"/>
+<div class="jumbotron">
+    <div class="col-sm-8 mx-auto">
+      <h1><% if (guild.iconURL()) { %><img class="img-fluid img-thumbnail" src="<%= guild.iconURL() %>?size=2048"> <% } %><br><%= guild.name %></h1>
+      <div class="row">
+				<div class="col">
+          <i class="fa fa-user fa-fw" aria-hidden="true"></i> Owner: <%= `${guild.owner.user.tag}` %>
+        </div>
+        <div class="col">
+          <i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= `${guild.memberCount}` %> Members
+          ( <i class="fa fa-android fa-fw" aria-hidden="true"></i> <%= `${guild.members.filter(m=>m.user.bot).size}` %> Bots )
+        </div>
+        <div class="col">
+          <i class="fa fa-users fa-fw" aria-hidden="true"></i> <%= `${guild.roles.size} Roles` %>
+        </div>
+        <div class="col">
+          Channels : <i class="fa fa-hashtag fa-fw" aria-hidden="true"></i> <%= `${guild.channels.filter(c=>c.type==='text').size}`%>
+          <i class="fa fa-microphone fa-fw" aria-hidden="true"></i> <%= `${guild.channels.filter(c=>c.type==='voice').size}`%>
+        </div>
+        <div class="col">
+      😀<%= `${guild.emojis.size} emojis` %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<h1 class="display-4">Settings</h1>
+
+          <form action="/manage/<%= guild.id %>" method='post' id="form_MESSAGE">
+            <label> PREFIX </label>
+                                     
+            <input type="text" name="send_prefix" class="form-control" placeholder=" " value="<%= config.prefix %>"><br>
+           <label>levelup message</label>
+                                            <select class="form-control" name="send_levelup">
+                                                <% if(config.levelup === "true"){ %>  
+        <option value="true" selected>true</option>
+                                <option value="false">false</option>                  <% } else { %>
+    <option value="true" selected>true</option>
+<option value="false" selected >false</option>                                        <% } %>                            </select>   
+            
+</form>
+        <br><button type="submit" class="btn" id="form_BUTTON" style="color: #363636 !important;border-color: #ced4da !important;" onclick="send();">Send</button>
+<br><br>
+<div id="pop"></div>
+    <script type="text/javascript">
+      function send() {
+        const alert = document.getElementById('pop');
+        alert.innerHTML = `<b>update command</b>`;
+        alert.setAttribute('class', 'alert success');
+
+        setTimeout(() => {
+            document.getElementById('form_MESSAGE').submit();
+        }, 3000)
+      }
+    </script>
+<%- include('./blocks/footer') %>

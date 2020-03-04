@@ -16,7 +16,7 @@ exports.run = (client, message, args) => {
       
       if (xpReq <= 0) xpReq = 0; 
   
-      var embed = new Discord.RichEmbed()
+      var embed = new Discord.MessageEmbed()
         .setColor(0xffffff)
         .setTitle("XP | Level")
         .addField("XP", pnts, true)

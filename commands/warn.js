@@ -30,7 +30,7 @@ exports.run = async (client, message, args) => {
   let reason = args.slice(1).join(' ');
   if (!reason) reason = reasons[Math.floor(Math.random() * reasons.length)];
 
-  const warned = new Discord.RichEmbed()
+  const warned = new Discord.MessageEmbed()
     .setColor(0xff5821)
     .setDescription(`You have been warned in ${message.guild.name} by ${message.author.username} for: *${reason}*.`)
     .setTitle("Warn")
@@ -50,7 +50,7 @@ exports.run = async (client, message, args) => {
 
   message.channel.send({
     embed: {
-      "description": `***${warnedmember.user.tag} was warned!***\n**Reason: **${reason}`,
+      "description": `***${warnedmember.user.tag} was warned!***\n**Reason: **${reason}\nwarn server${message.guild.name}`,
       "title": "Warned by " + message.author.username,
       "color": 0xff5821
     }

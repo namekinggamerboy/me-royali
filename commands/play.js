@@ -21,7 +21,7 @@ exports.run = async (client, message, args, ops) => { //Collecting info about co
     volume: config[message.guild.id].volume / 100
   };
 
-  if (!message.member.voiceChannel) {
+  if (!message.member.voice.channel) {
     return message.channel.send({
       embed: {
         "title": "Join voice channel first!",
@@ -57,7 +57,7 @@ exports.run = async (client, message, args, ops) => { //Collecting info about co
   let data = ops.active.get(message.guild.id) || {};
 
   if (!data.connection) {
-    data.connection = await message.member.voiceChannel.join();
+    data.connection = await message.member.voice.channel.join();
   }
 
   if (!data.queue) {
@@ -76,7 +76,7 @@ exports.run = async (client, message, args, ops) => { //Collecting info about co
   if (!data.dispatcher) {
     play(client, ops, data, streamOptions);
   } else {
-    message.channel.send(new Discord.RichEmbed()
+    message.channel.send(new Discord.MessageEmbed()
       .setColor(0x0ea5d3)
       .setAuthor("Suggested by " + message.author.username, message.author.avatarURL)
       .setDescription("Added to queue **" + info.title + "**")).then(msg => {
@@ -92,7 +92,7 @@ exports.run = async (client, message, args, ops) => { //Collecting info about co
 
 async function play(client, ops, data, streamOptions) {
 
-  client.channels.get(data.queue[0].announceChannel).send(new Discord.RichEmbed()
+  client.channels.get(data.queue[0].announceChannel).send(new Discord.MessageEmbed()
     .setColor("0099ff")
     .setAuthor("Suggested by " + data.queue[0].requestAuthor.username, data.queue[0].requestAuthor.avatarURL)
     .setDescription("Now playing **" + data.queue[0].songTitle + "**")).then(msg => {
@@ -101,8 +101,8 @@ async function play(client, ops, data, streamOptions) {
     }
   });
 
-  data.dispatcher = await data.connection.playStream(ytdl(data.queue[0].url, {
-    filter: "audioonly", quality: "highestaudio" , highWaterMark: 1024 * 1024 * 10
+  data.dispatcher = await data.connection.play(ytdl(data.queue[0].url, {
+    filter: "audioonly", quality: "highestaudio"
   }), streamOptions);
 
   data.dispatcher.guildID = data.guildID;
@@ -124,7 +124,7 @@ async function finish(client, ops, dispatcher) {
   } else {
     fetched.dispatcher.end();
     ops.active.delete(dispatcher.guildID);
-    let vc = client.guilds.get(dispatcher.guildID).me.voiceChannel;
+    let vc = client.guilds.get(dispatcher.guildID).me.voice.channel;
     if (vc) {
       vc.leave();
     }

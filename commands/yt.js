@@ -18,9 +18,8 @@ exports.run = (client, message, args, ops) => { //Collecting info about command
       }
     });
 
-    let videos = res.videos.slice(0, 5);
+    let videos = res.videos.slice(0, 1);
     let response = "";
-    
     if (videos.length == 0) return message.channel.send({
       embed: {
         "title": "Can't find a song by your request!",
@@ -31,34 +30,17 @@ exports.run = (client, message, args, ops) => { //Collecting info about command
         msg.delete(config[message.guild.id].deleteTime);
       }
     });
-    
     for (var i in videos) {
-      response += `**${parseInt(i)+1}.** \`${videos[i].title}\`\n`;
+      response += `**${parseInt(i)+1}.** \[${videos[i].title}](${videos[i].url})\n`;
     }
 
-    var title = `*Choose number between 1 and ${videos.length}* | \`0\` to cancel`;
+    var title = `*Choose number between 1 and ${videos.length}*`;
 
-    const filter = m => !isNaN(m.content) && parseInt(m.content) <= videos.length && parseInt(m.content) >= 0;
+    const filter = m => !isNaN(m.content) && m.content <= videos.length && m.content > 0;
     const collector = message.channel.createMessageCollector(filter);
     
-    message.channel.send({
-      embed: {
-        "description": response,
-        "title": title,
-        "color": 10616630
-      }
-    });
+    message.channel.send("http://www.youtube.com"+`${videos[i].url}`);
 
     collector.videos = videos;
-
-    collector.once('collect', async function(m) {
-      if (m.content == "0") {
-        message.channel.send({ embed: {"title": "Canceled", "color": 0x22ff22} }); 
-        return;
-      }
-      
-      let commandFile = require('./play.js');
-      await commandFile.run(client, message, [this.videos[parseInt(m.content) - 1].url], ops);
     });
-  });
-}
+  }

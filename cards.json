@@ -22,7 +22,7 @@
   "596521432507219980": {
     "color": "#00FF00",
     "colorRank": "#00FF00",
-    "image": ""
+    "image": "https://cdn.glitch.com/1db7e664-2969-4bc0-93a2-c81934e82546%2FPicsArt_03-01-01.23.36.png?v=1583049310879"
   },
   "552127708318924822": {
     "color": "#ffffff",
@@ -32,6 +32,16 @@
   "583447602553683969": {
     "color": "#ffffff",
     "colorRank": "#aaaaaa",
+    "image": ""
+  },
+  "536962208811188225": {
+    "color": "#00FFFF",
+    "colorRank": "#0099ff",
+    "image": ""
+  },
+  "615955417616613376": {
+    "color": "#00FFFF",
+    "colorRank": "#0099ff",
     "image": ""
   }
 }

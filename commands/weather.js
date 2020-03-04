@@ -25,19 +25,17 @@ exports.run = (client, message, args) => {
     }
     var current = result[0].current;
     var location = result[0].location;
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
       .setDescription(`**${current.skytext}**`)
       .setAuthor(`Weather for ${current.observationpoint}`)
       .setThumbnail(current.imageUrl)
-      .setColor(0x00AE86)
+      .setColor('RANDOM')
       .addField('Timezone', `UTC${location.timezone}`, true)
       .addField('Degree Type', location.degreetype, true)
       .addField('Temperature', `${current.temperature} Degrees`, true)
       .addField('Feels like', `${current.feelslike} Degrees`, true)
       .addField('Winds', current.winddisplay, true)
-      .addField('Humidity', `${current.humidity}%`, true)
-    message.channel.send({
-      embed
-    });
+      .addField('Humidity', `${current.humidity}%`, true);
+    message.channel.send(embed);
   })
 }

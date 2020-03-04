@@ -7,7 +7,8 @@ exports.run = async (client, message, args) => {
 
   const userwarn = new db.table('USERWARNINGs');
 
-  userwarn.startsWith(`warn_${message.author.id}`).then(resp => {
+  let mem = message.mentions.users.first()||message.author;
+  userwarn.startsWith(`warn_${mem.id}`).then(resp => {
 
     let title = 'Warns';
     var finalLb = "";
