@@ -14,7 +14,7 @@ exports.run = (client, message, args, ops) => { //Collecting info about command
       }
     });
 
-    let embed = new Discord.RichEmbed()
+    let embed = new Discord.MessageEmbed()
       .setColor(0x42f4cb)
       .setDescription(json.definition)
       .addField('Example', json.example)

@@ -19,27 +19,21 @@ try {
 const active = new Map();
 const log = '684285303279583242'; // Logging channel
 
-const serverStats = {
-  guildID: '635051074809626657',
-  totalUsersID: '683176974621081631',
-  memberCountID: '684002945389690915',
-  botCountID: '683177008028713024'
-};
 
 var ownerId = '596521432507219980';
 // Init discord giveaways
 const { GiveawaysManager } = require('discord-giveaways');
 client.giveawaysManager = new GiveawaysManager(client, {
     storage: "./giveaways.json",
-    updateCountdownEvery: 10000,
+    updateCountdownEvery: 5000,
     default: {
         botsCanWin: false,
         exemptPermissions: [ "MANAGE_MESSAGES", "ADMINISTRATOR" ],
-        embedColor: "#00FFFF",
-        reaction: "635689659912945674"
+        embedColor: "#FF0000",
+        reaction: "🎉"
     }
 });
-// We now have a client.giveawaysManager property to manage our giveaways!
+
 
 const getDefaultChannel = async (guild) => {
   if(guild.channels.has(guild.id))
@@ -71,7 +65,6 @@ client.on('ready', async () => { //Startup
 
 	require('./mm/dashboard')(client);
   console.log("Bot on!");
-  client.user.setUsername("ME ROYAL PLUS");
   client.user.setActivity(`on ${client.users.size} users | ?help`, {
     type: 'WATCHING'
   });
@@ -92,13 +85,20 @@ client.on('guildCreate', guild => { // If the Bot was added on a server, proceed
   
   config[guild.id] = {
     prefix: '?',
-    delete: 'true',
-    deleteTime: 10000,
-    volume: 100,
-    maxVolume: 200,
-    djonly: false,
+    delete: 'false',
+    deleteTime: '10000',
+    volume: '100',
+    maxVolume: '200',
+    djonly: 'false',
     djroles: [],
-    levelup: false
+    levelup: 'false',
+      levelupchannel: '₹₹)₹)₹)2)₹(_(₹)#)#9@)2)2)##)#)',
+      levelupmessage: 'false',
+        welcomeimage: 'https://static.tildacdn.com/tild3166-3465-4533-b163-323762393762/-/empty/database1.png',
+    welcomecolor: '#0099ff',
+    welcometext: '#0099ff',
+    welcomess: 'false',
+      welcomechannel: 'chat'
   }
   fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
   
@@ -115,7 +115,7 @@ client.on('guildCreate', guild => { // If the Bot was added on a server, proceed
     .addField("Default volume", "100%", false)
     .addField("Max volume", "200%", false)
     .addField("Level UP messages", "false", false)
-    .setFooter("Members: " + guild.memberCount + " | Guild: " + guild.name + " | Use ?help to get help information | Official website: https://me-royal.glitch.me");
+    .setFooter("Members: " + guild.memberCount + " | Guild: " + guild.name + " | Use ?help to get help information | Official website: https://me-royal-plus.glitch.me");
   
   const channel = Promise.resolve(getDefaultChannel(guild));
   channel.then(function(ch) {
@@ -149,9 +149,10 @@ client.on('guildDelete', (guild) => { // If the Bot was removed on a server, pro
     .setDescription(`**Guild Name**: ${guild.name}\n**Guild ID**: ${guild.id}\n**Members Lost**: ${guild.memberCount}\n**Server owner:**${guild.owner.user.tag}`)
     chan.send(liveLEmbed);
 });
+/* ---- */
 
 /* ON MESSAGE */
-client.on('message', message => { //If recieves message
+client.on('message', async message => { //If recieves message
   
   if (message.channel.type == "dm")return;
   
@@ -160,13 +161,20 @@ client.on('message', message => { //If recieves message
   } catch(ex){
     config[message.guild.id] = {
       prefix: '?',
-      delete: 'true',
-      deleteTime: 10000,
-      volume: 100,
-      maxVolume: 200,
-      djonly: false,
+      delete: 'false',
+      deleteTime: '10000',
+      volume: '100',
+      maxVolume: '200',
+      djonly: 'false',
       djroles: [],
-      levelup: false
+      levelup: 'false',
+      levelupchannel: '₹₹)₹)₹)2)₹(_(₹)#)#9@)2)2)##)#)',
+      levelupmessage: 'false',
+          welcomeimage: 'https://static.tildacdn.com/tild3166-3465-4533-b163-323762393762/-/empty/database1.png',
+    welcomecolor: '#0099ff',
+    welcometext: '#0099ff',
+    welcomess: 'false',
+      welcomechannel: 'chat'
     }
     fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
   }
@@ -175,19 +183,26 @@ client.on('message', message => { //If recieves message
   if (config[message.guild.id] == undefined) {
     config[message.guild.id] = {
       prefix: '?',
-      delete: 'true',
-      deleteTime: 10000,
-      volume: 100,
-      maxVolume: 200,
-      djonly: false,
+      delete: 'false',
+      deleteTime: '10000',
+      volume: '100',
+      maxVolume: '200',
+      djonly: 'false',
       djroles: [],
-      levelup: false
+      levelup: 'false',
+      levelupchannel: '₹₹)₹)₹)2)₹(_(₹)#)#9@)2)2)##)#)',
+      levelupmessage: 'false',
+    welcomeimage: 'https://static.tildacdn.com/tild3166-3465-4533-b163-323762393762/-/empty/database1.png',
+    welcomecolor: '#0099ff',
+    welcometext: '#0099ff',
+    welcomess: 'false',
+      welcomechannel: 'chat'
     }
     fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
   }
   
   if (message.author.bot) return; //If bot
-  
+  if (message.guild.id !== "264445053596991498" && config[message.guild.id].levelup !== 'false') {
   let xpAdd = Math.floor(Math.random() * 7) + 8;
   
   // POINT SYSTEM
@@ -217,13 +232,23 @@ client.on('message', message => { //If recieves message
         levels.add(`${message.guild.id}_${message.author.id}`, 1);
         points.set(`${message.guild.id}_${message.author.id}`, 0);
         levels.fetch(`${message.guild.id}_${message.author.id}`, {"target": ".data"}).then(lvl => {
-          if (message.guild.id !== "264445053596991498" && config[message.guild.id].levelup !== false) {
-		message.reply({ embed: {"title": "Level Up!", "description": "Now your level - **" + lvl + "**", "color": 0x42f477} });
-          }
-        });
+      if(config[message.guild.id].levelupmessage === 'true'){
+const { Canvas } = require("canvas-constructor"); 
+const { resolve, join } = require('path'); 
+const { get }= require('snekfetch');
+const superagent = require('superagent')
+const { fetch } = require('node-fetch'); 
+        
+let chan = message.guild.channels.find(e => e.name === config[message.guild.id].levelupchannel);
+if(chan === '₹₹)₹)₹)2)₹(_(₹)#)#9@)2)2)##)#)') chan = message.channel;	
+        chan.send(`<@${message.author.id}>`,{embed:{title: "levelup", color: 0x00ff00, image:{ url: "https://cdn.discordapp.com/attachments/675640023273701437/682081085785636900/Discord_Achievement_Template_3.gif" }, description: `your level up to ${lvl}`}});
       }
+        }
+          
+       )};
     });
   });
+  };
 
   //END OF POINT SYSTEM
   
@@ -244,10 +269,10 @@ client.on('message', message => { //If recieves message
     var author = message.member;
     var role = message.guild.roles.find(e => e.name === "Hide NSFW"); //Role Search
     if (author.roles.has(role.id)) { 
-      author.removeRole(role).then(() => message.channel.send({ embed: {"title": "Now you will see that hell... :ok_hand:"} })).then(msg => {msg.delete(10000);});
+      author.roles.removeRole(role).then(() => message.channel.send({ embed: {"title": "Now you will see that hell... :ok_hand:"} })).then(msg => {msg.delete(10000);});
     }
     else {
-      author.addRole(role).then(() => message.channel.send({ embed: {"title": "Now your mom won't see any hentai :ok_hand:"} })).then(msg => {msg.delete(10000);});
+      author.roles.add(role).then(() => message.channel.send({ embed: {"title": "Now your mom won't see any hentai :ok_hand:"} })).then(msg => {msg.delete(10000);});
     }
     return;
   }
@@ -275,7 +300,9 @@ client.on('message', message => { //If recieves message
     }
 
     let commandFile = require(`./commands/${cmd}.js`); //Require command from folder
-    commandFile.run(client, message, args, ops); //Pass four args into 'command'.js and run it
+    commandFile.run(client, message, args, ops); 
+console.log(`${message.guild.name}/#${message.channel.name} (${message.channel.id}):${message.author.username} (${message.author.id}) ran command ${cmd}`); 
+    //Pass four args into 'command'.js and run it
 
   } catch (e) { //Catch errors 
     if (!message.content === "?reset-prefix") {
@@ -296,59 +323,70 @@ client.on('message', message => { //If recieves message
   }
 });
 
+const canvas = require("discord-canvas"),
+  welcomeCanvas = new canvas.Welcome();
+client.on('guildMemberAdd', async member => {
+    if (config[member.guild.id].welcomess === "true") {
+ let avatar =  member.user.displayAvatarURL({ format: 'png', size: 2048 });
+ let image = await welcomeCanvas
+.setUsername(member.user.username)
+  .setDiscriminator(member.user.discriminator)
+  .setMemberCount(member.guild.memberCount)
+  .setGuildName(member.guild.name)
+  .setAvatar(avatar)
+  .setColor("border", config[member.guild.id].welcomecolor)
+  .setColor("username-box", config[member.guild.id].welcomecolor)
+  .setColor("discriminator-box", config[member.guild.id].welcomecolor)
+  .setColor("message-box", config[member.guild.id].welcomecolor)
+  .setColor("title", config[member.guild.id].welcometext)
+  .setColor("avatar", config[member.guild.id].welcomecolor)
+.setBackground(config[member.guild.id].welcomeimage)
+  .toAttachment();
 
-client.on('guildMemberAdd', member => {
-  if (member.guild.id !== serverStats.guildID) return;
-  client.channels.get(serverStats.totalUsersID).setName(`Total: ${member.guild.memberCount}`);
-  client.channels.get(serverStats.memberCountID).setName(`Users: ${member.guild.members.filter(m => !m.user.bot).size}`);
-  client.channels.get(serverStats.botCountID).setName(`Bots: ${member.guild.members.filter(m => m.user.bot).size}`);
+let attachment = new Discord.MessageAttachment(image.toBuffer(), "welcome.png");
+ 
+  let chann = client.channels.find(e => e.name === config[member.guild.id].welcomechannel);
+    chann.send(attachment);    
+    }
   db.set(`bal_${member.guild.id}_${member.id}`, 0);
   levels.set(`${member.guild.id}_${member.id}`, 1);
   points.set(`${member.guild.id}_${member.id}`, 0);
-  xpl.set(`${member.guild.id}_${member.id}`, 0);
-  
-  var userGot = new Discord.RichEmbed()
-    .setColor(0x555555)
-    .setDescription("User got")
-    .setTitle(member.tag);
-  
-  send(log, userGot, {
-    name: "Bot Log",
-    icon: "https://cdn.glitch.com/88b80c67-e815-4e13-b6a0-9376c59ea396%2F862.png?1532600798485"
-  });
-  
+  xpl.set(`${member.guild.id}_${member.id}`, 0); 
 });
 
 client.on('guildMemberRemove', member => {
-  if (member.guild.id !== serverStats.guildID) return;
-  client.channels.get(serverStats.totalUsersID).setName(`Total: ${member.guild.memberCount}`);
-  client.channels.get(serverStats.memberCountID).setName(`Users: ${member.guild.members.filter(m => !m.user.bot).size}`);
-  client.channels.get(serverStats.botCountID).setName(`Bots: ${member.guild.members.filter(m => m.user.bot).size}`);
   db.delete(`bal_${member.guild.id}_${member.id}`);
   levels.delete(`${member.guild.id}_${member.id}`);
   points.delete(`${member.guild.id}_${member.id}`);
   xpl.delete(`${member.guild.id}_${member.id}`);
-  
-  var userLost = new Discord.RichEmbed()
-    .setColor(0x555555)
-    .setDescription("User lost")
-    .setTitle(member.tag);
-  
-  send(log, userLost, {
-    name: "Bot Log",
-    icon: "https://cdn.glitch.com/88b80c67-e815-4e13-b6a0-9376c59ea396%2F862.png?1532600798485"
-  });
-  
 });
+client.on('messageUpdate', async (oldMessage, newMessage) => {
+
+  });
 
 client.on('message', msg => {
  let prefix = config[msg.guild.id].prefix;
-  if (msg.content === '<@'+client.user.id+'>') {
+    if(msg.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))){
     msg.channel.send({ embed: {
-      title: "`MY NAME` : "+`${client.user.username}`+" , my default prefix: `?` , Custom Server prefix: "+"``"+`${prefix}`+"``",
+      title: "My prefix in this server is set to: "+"``"+`${prefix}`+"``\nTo reset to default execute `?reset-prefix` command!",
       color: 0x00FFFF
     }});
-  }
+  };
+});
+
+const bod_api = require("bodapi.js");
+const bod = new bod_api('uT3ZtT8HaMGxRnIF3Fd0meHGNPWx1w', client);
+
+// m is optional
+bod.on('posted', (m) => {
+ console.log(m);
+})
+
+bod.on('error', e => {
+  console.log(`Error ${e}`);
+})
+bod.getStats("674108575118786560").then(stats => {
+ console.log(stats)
 });
 
 client.login(process.env.TOKEN);

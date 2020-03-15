@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 var fs = require('fs'); //FileSystem
 let config = JSON.parse(fs.readFileSync("./config.json", "utf8")); //Config file
-const Canvas = require('canvas');
 const jimp = require('jimp');
 const q = require('quick.db');
 //const { canvasConstr } = require('canvas-constructor');
 const image2base64 = require('image-to-base64');
+const Canvas = require('canvas');
 try {
-  const cards = JSON.parse(fs.readFileSync("./cards.json", "utf8")); //Cards file
+  const cards = JSON.parse(fs.readFileSync("./cards.json", "utf8"));//Cards file
 } catch (ex) {
   console.log("[ERROR] Cards overwrited");
   const cards = {}
@@ -16,7 +16,7 @@ try {
 var cards = JSON.parse(fs.readFileSync("./cards.json", "utf8")); //Cards file
 
 exports.run = (client, message, args, ops) => { //Collecting info about command
-
+    if (message.guild.id !== "264445053596991498" && config[message.guild.id].levelup === 'false') return message.channel.send('this levelup is disabled');
   let member = message.mentions.members.first();
   if (!member) member = message.member;
   
@@ -59,7 +59,6 @@ exports.run = (client, message, args, ops) => { //Collecting info about command
   if (cards[member.id] === undefined) {
     cards[member.id] = {
       color: "#00FFFF",
-      colorRank: "#0099ff",
       image: ""
     };
     fs.writeFile("./cards.json", JSON.stringify(cards, null, 2), (err) => {
@@ -68,22 +67,18 @@ exports.run = (client, message, args, ops) => { //Collecting info about command
   }
 
   var color = cards[member.id].color;
-  var colorRank = cards[member.id].colorRank;
+  var colorRank = color;
 
   if (cards[member.id].color == undefined) {
     color = "#ffffff";
   }
 
-  if (cards[member.id].colorRank == undefined) {
-    colorRank = "#aaaaaa";
-  }
 
   var colorStatus = "#00ff00";
 
   if (args.includes("-color")) {
     if (!args[args.indexOf("-color") + 1].startsWith("#")) {
       color = "#" + args[1];
-      colorRank = color;
       cards
     } else {
       color = args[1];
@@ -92,7 +87,6 @@ exports.run = (client, message, args, ops) => { //Collecting info about command
 
     if (color.length == 7) {
       cards[message.author.id].color = color;
-      cards[message.author.id].colorRank = colorRank;
       fs.writeFile("./cards.json", JSON.stringify(cards, null, 2), (err) => {
         if (err) return console.log(err)
       });
@@ -221,7 +215,7 @@ exports.run = (client, message, args, ops) => { //Collecting info about command
           if (widthXP > 615 - 18.5) widthXP = 615 - 18.5;
 
           ctx.beginPath();
-    
+          ctx.fillStyle = "#424751";
           ctx.arc(257 + 18.5, 147.5 + 18.5 + 36.25, 18.5, 1.5 * Math.PI, 0.5 * Math.PI, true);
           ctx.fill();
           ctx.fillRect(257 + 18.5, 147.5 + 36.25, 615 - 18.5, 37.5);
@@ -243,14 +237,11 @@ exports.run = (client, message, args, ops) => { //Collecting info about command
           ctx.stroke();
           ctx.clip();
           ctx.drawImage(ava, 85, 66, 150, 150);
-
-          message.channel.send({
-            files: [
-              canvas.toBuffer()
-            ]
-          });
+let attachment = new Discord.MessageAttachment(canvas.toBuffer(), "rank.png");
+          message.channel.send(attachment);
         });
       });
     });
   });
-}
+};
+

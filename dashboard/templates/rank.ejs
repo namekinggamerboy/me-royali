@@ -1,0 +1,36 @@
+<%- include('blocks/header', {bot:bot, user: user, auth: auth}) %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css"/>
+<div class="jumbotron">
+    <div class="col-sm-8 mx-auto">
+      <h3><% if (user.avatar) { %><img class="img-fluid img-thumbnail" src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png?size=2048"> <% } %><br><%= user.username %></h3>
+    </div>
+  </div>
+
+<h1 class="display-4">Rank card</h1>
+
+          <form action="/rank/<%=  user.id %>" method='post' id="form_MESSAGE">
+            <label> image </label>
+                                     
+            <input type="text" name="send_image" class="form-control" placeholder=" " value="<%= ran.image %>">
+            <br>
+           <label>color</label> 
+  <input name="send_color" type="color" value="<%= ran.color %>"> 
+            
+</form>
+        <br><button type="submit" class="btn" id="form_BUTTON" style="color: #363636 !important;border-color: #ced4da !important;" onclick="send();">sumit</button>
+<br><br>
+<div id="pop"></div>
+
+
+    <script type="text/javascript">
+      function send() {
+        const alert = document.getElementById('pop');
+        alert.innerHTML = `<b>update command</b>`;
+        alert.setAttribute('class', 'alert success');
+
+        setTimeout(() => {
+            document.getElementById('form_MESSAGE').submit();
+        }, 3000)
+      }
+    </script>
+<%- include('./blocks/footer') %>

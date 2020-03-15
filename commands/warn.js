@@ -8,10 +8,8 @@ exports.run = async (client, message, args) => {
   let reasons = [
     "I'm sorry, friend, but someone's stray hand today",
     "From the heart",
-    "Just because",
     "No reason, haha",
-    "You asked for it",
-    "Fok u"
+    "You asked for it"
   ];
 
   if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send({

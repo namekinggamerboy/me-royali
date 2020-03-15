@@ -5,6 +5,7 @@ var fs = require('fs'); //FileSystem
 let conf = JSON.parse(fs.readFileSync("./config.json", "utf8")); //Config file
 
 exports.run = async (client, message, args, ops) => {
+    if (message.guild.id !== "264445053596991498" && conf[message.guild.id].levelup === 'false') return message.channel.send('this levelup is disabled');
   var points = new db.table("TOTAL_POINTS");
   points.startsWith(`${message.guild.id}`, {
     sort: '.data'
@@ -22,7 +23,10 @@ exports.run = async (client, message, args, ops) => {
       embed: {
         "description": finalLb,
         "title": title,
-        "color": 16777215
+        "color": "RANDOM",
+        thumbnail: {
+          url: message.guild.iconURL(),
+        }
       }
     }).then(msg => {
       if (conf[message.guild.id].delete == 'true') {

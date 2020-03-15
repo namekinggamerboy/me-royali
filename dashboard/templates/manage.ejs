@@ -30,19 +30,22 @@
           <form action="/manage/<%= guild.id %>" method='post' id="form_MESSAGE">
             <label> PREFIX </label>
                                      
-            <input type="text" name="send_prefix" class="form-control" placeholder=" " value="<%= config.prefix %>"><br>
+            <input type="text" name="send_prefix" class="form-control" value="<%= config.prefix %>"><br>
            <label>levelup message</label>
                                             <select class="form-control" name="send_levelup">
                                                 <% if(config.levelup === "true"){ %>  
         <option value="true" selected>true</option>
                                 <option value="false">false</option>                  <% } else { %>
-    <option value="true" selected>true</option>
+    <option value="true" >true</option>
 <option value="false" selected >false</option>                                        <% } %>                            </select>   
             
 </form>
-        <br><button type="submit" class="btn" id="form_BUTTON" style="color: #363636 !important;border-color: #ced4da !important;" onclick="send();">Send</button>
+        <br><button type="submit" class="btn" id="form_BUTTON" style="color: #363636 !important;border-color: #ced4da !important;" onclick="send();">Sumit</button>
 <br><br>
 <div id="pop"></div>
+<br><br>
+
+
     <script type="text/javascript">
       function send() {
         const alert = document.getElementById('pop');

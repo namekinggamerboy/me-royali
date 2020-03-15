@@ -7,9 +7,9 @@ module.exports = {
     name: "rps",
     run: async (client, message, args) => {
         const embed = new discord.MessageEmbed()
-            .setColor("#ffffff")
+            .setColor("RANDOM")
             .setFooter(message.guild.me.displayName, client.user.displayAvatarURL)
-            .setDescription("Add a reaction to one of these emojis to play the game!")
+            .setDescription("`Add a reaction to one of these emojis to play the game!`")
             .setTimestamp();
 
         const m = await message.channel.send(embed);
@@ -18,7 +18,7 @@ module.exports = {
         const botChoice = chooseArr[Math.floor(Math.random() * chooseArr.length)];
 
         const result = await getResult(reacted, botChoice);
-        await m.clearReactions();
+        await m.reactions.remove();
 
         embed
             .setDescription("")

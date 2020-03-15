@@ -61,6 +61,10 @@ exports.run = (client, message, args, ops) => {
                 name: "Level UP messages",
                 value: "`levelup` - " + levelup
               },
+                            {
+              name: "esay to edit go and use dashboard",
+              value: "https://me-royal-plus.glitch.me"
+              },
             ]
           }
         })
