@@ -17,3 +17,7 @@ Whats function
 
 
 How to start my bot- go .env and TOKEN= paste your bot token
+
+
+Some copyright ©️ 
+1. Dashboard templates some idea by. https://github.com/NdT3Development/DiscordBot
