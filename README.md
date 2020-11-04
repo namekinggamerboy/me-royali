@@ -7,7 +7,7 @@ Whats function
 
 > Fs file storage
 
-> Shard base
+> No Shard base
 
 > Discord.js 12.0.0-dev version base
 
