@@ -14,3 +14,6 @@ Whats function
 > Canvas welcomer
 
 > More...
+
+
+How to start my bot- go .env and TOKEN= paste your bot token
